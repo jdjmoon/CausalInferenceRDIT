@@ -9,6 +9,7 @@ set.seed(2024)
 
 ###############################
 # Read Statin file
+## Use ACE_Paper_GWAS_5.txt if using Ace Inhibitor
 file_exp<-'Statin_GWAS_0806.txt' 
 ldl_exp_dat_org <- read_exposure_data( 
     filename = file_exp,
@@ -24,6 +25,7 @@ ldl_exp_dat_org <- read_exposure_data(
 
 ##################################
 # Read Statin Outcome File
+## Use OUT_ACEi_SNP_0813.csv if using Ace Inhibitor
 file_proteins<-"OUT_Statin_SNP_0806.csv"
 protein_all <- fread(file_proteins, header=TRUE, sep=",")
 # Protein_Name<-strsplit(protein_all$FILE,"_")
