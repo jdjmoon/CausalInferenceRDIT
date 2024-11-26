@@ -10,6 +10,8 @@ The repository is organized into the following directories:
   - [rdit_data_intervention_processing](0data_processing/rdit_data_intervention_processing.py): Prepares data for RDiT analysis of randomized interventions.
   - [cross_sectional_association_data_processing](0data_processing/cross_sectional_association_data_processing.R): Prepares data for cross-sectional association analysis.
   - [longitudinal_association_data_processing](0data_processing/longitudinal_association_data_processing.R): Prepares data for longitudinal association analysis.
+
+
 - ([1run_models](1run_models)): Scripts to reproduce the analyses and evaluate the causal associations between the ATC Level 4 Prescription and each omics biomarker.
   - [rdit_analysis](1run_models/rdit_analysis.py): Executes RDiT analysis.
   - [rdit_power_analysis.py](1run_models/rdit_power_analysis.py): Runs power analysis for the RDiT model.
