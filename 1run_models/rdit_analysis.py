@@ -29,7 +29,7 @@ def rd(drugs):
         for i in drugs:
             print(i)
             drug = i
-            csv_file = 'DATA_B/' + drug  + duration_y+'.csv' # Make _M if Metabolite and _P if Protein
+            csv_file = '../data/processed_data/DATA_B/' + drug  + duration_y+'.csv' # Make _M if Metabolite and _P if Protein
 
 
             dt2_original = pd.read_csv(csv_file)
