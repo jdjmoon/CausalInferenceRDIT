@@ -35,7 +35,7 @@ blood_date2 = blood_date.copy()
 # Olink Proteins = omics_data/ukbnmr_processed_metabolite_firstvisit.csv
 
 nmr = pd.read_csv('../data/omics_data/bloodchem_firstvisit.csv')
-nmr = nmr.rename(columns = {'f.eid':'eid'})
+nmr = nmr.rename(columns = {'eid':'eid'})
 
 pres = pres2.copy()
 cov = cov2.copy()
