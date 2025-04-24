@@ -25,3 +25,5 @@ The repository is organized into the following directories:
   - The Regression Discontinuity in Time (RDiT) model applies [rdroubst package](https://github.com/rdpackages/rdrobust/tree/master).
   - The power analysis for the RDiT model utilizes [rdpower packge](https://rdpackages.github.io/rdpower/).
   - The Mendelian Randomization model uses [TwoSampleMR](https://mrcieu.github.io/TwoSampleMR/).
+  
+- ([data](data)): toy dataset created to run the models
