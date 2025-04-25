@@ -34,9 +34,13 @@ The repository is organized into the following directories:
 - Python version: 3.8.8
 - R version: 4.3.3
 
-conda env create -f environment.yml
-conda activate rdit_env
-install.packages("remotes")  # If not already installed
-remotes::install_github("MRCIEU/TwoSampleMR")
-remotes::install_github("MRCIEU/ieugwasr")
+### Install environment
+- conda env create -f environment.yml
+
+### Set up environment
+- conda activate rdit_env
+- R
+  - install.packages("remotes")  # If not already installed
+  - remotes::install_github("MRCIEU/TwoSampleMR")
+  - remotes::install_github("MRCIEU/ieugwasr")
 
