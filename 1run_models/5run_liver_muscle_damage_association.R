@@ -3,13 +3,24 @@ library(data.table)
 
 cov <- fread('../data/processed_data/processed_covariates_blood_chem_ca.csv')
 
-clinical_trial_dataset <= fread('../data/processed_data/clinical_markers.csv')
-
+clinical_trial_dataset <- fread('../data/processed_data/clinical_markers.csv')
 protein <- fread('../data/processed_data/processed_blood_chem_ca.csv')
-protein <- select(protein, c('eid', 'ADA', 'AGRP', 'ANGPTL3', 'APCS', 'APOA2', 'APOC1', 'APOM', 'CCDC80', 'CCL13', 'CCL27', 'CCN1', 'CES1', 'CREG1', 'DCBLD2', 'ERBB2', 'ERN1', 'FAP', 'FGFBP1', 'GUSB', 'IGSF3', 'ITGB7',
-       'ITIH3', 'KLK13', 'LCAT', 'LDLR', 'MSR1', 'NPY', 'PCOLCE', 'PLA2G7', 'PODXL', 'SIGLEC7', 'SMAD5', 'SUMF2', 'TFPI', 'TNFSF10', 'TNFSF11', 'VWA1'))
 
-covs = merge(covs, clinical_trial_dataset)
+if ("f.eid" %in% names(cov)) {
+  setnames(cov, "f.eid", "eid")
+}
+
+if ("f.eid" %in% names(clinical_trial_dataset)) {
+  setnames(clinical_trial_dataset, "f.eid", "eid")
+}
+
+if ("f.eid" %in% names(protein)) {
+  setnames(protein, "f.eid", "eid")
+}
+
+protein <- select(protein, c('eid', 'biom1.0.0', 'biom2.0.0'))
+
+covs = merge(cov, clinical_trial_dataset, by = 'eid')
 dt = merge(covs, protein, by = 'eid')
 
 drug = 'C10AA'

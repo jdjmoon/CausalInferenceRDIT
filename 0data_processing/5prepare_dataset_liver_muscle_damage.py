@@ -106,6 +106,17 @@ def create_clinical_markers():
     bd['blood_date'] = pd.to_datetime(bd['blood_date'])
     bd['lower_bound'] = bd['blood_date'] - pd.to_timedelta(365*3+1,unit='days')
     ca_all1 = pd.merge(ca_all1, bd, on = 'eid')
+    bd2 = statin1[['eid','event_dt']]
+    bd2['C10AA'] = 1
+    bds = pd.merge(bd, bd2, on = 'eid')
+    bds['event_dt'] = pd.to_datetime(bds['event_dt'])
+    bds['blood_date'] = pd.to_datetime(bds['blood_date'])
+    bds = bds[bds['event_dt'] <= bds['blood_date']] 
+    bds = bds[bds['lower_bound'] <= bds['event_dt']]
+    bds = bds[['eid', 'C10AA']].drop_duplicates().reset_index(drop=True)
+    ca_all1 = pd.merge(ca_all1, bds, on='eid', how='left')
+    ca_all1['C10AA'] = ca_all1['C10AA'].fillna(0)
+
     ca_all1 = merge_lab_within_window(ca_all1, statin1, dfalt, 'alt')
     ca_all1 = merge_lab_within_window(ca_all1, statin1, dfast, 'ast')
     ca_all1 = merge_lab_within_window(ca_all1, statin1, dfck, 'ck')
@@ -114,7 +125,7 @@ def create_clinical_markers():
     ca_all1 = merge_lab_within_window(ca_all1, statin1, dfalb, 'alb')
     ca_all1 = merge_lab_within_window(ca_all1, statin1, dfalp, 'alp')
 
-    ca_all1 = ca_all1[['eid', 'alt', 'ast', 'ggt', 'ck', 'bil', 'alb', 'alp', 'GSI', 'SRM']].drop_duplicates().reset_index(drop=True)
+    ca_all1 = ca_all1[['eid', 'C10AA','alt', 'ast', 'ggt', 'ck', 'bil', 'alb', 'alp', 'GSI', 'SRM']].drop_duplicates().reset_index(drop=True)
     ca_all1.set_index('eid').to_csv('../data/processed_data/clinical_markers.csv')
 
 if __name__ == "__main__":
