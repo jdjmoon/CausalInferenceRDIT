@@ -1,0 +1,10 @@
+install.packages(c(
+  "tidyverse",
+  "data.table",
+  "remotes"
+))
+
+# Install GitHub packages
+remotes::install_github("MRCIEU/TwoSampleMR")
+remotes::install_github("MRCIEU/ieugwasr")
+

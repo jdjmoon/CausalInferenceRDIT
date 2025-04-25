@@ -36,19 +36,6 @@ The repository is organized into the following directories:
 
 ### Install environment
 ```
-conda env create -f environment.yml
+pip install -r requirements.txt
+Rscript r_requirements.txt
 ```
-
-### Set up environment
-```
-conda activate rdit_env
-R
-```
-
-After opening R
-```
-library(remotes)
-remotes::install_github("MRCIEU/TwoSampleMR")
-remotes::install_github("MRCIEU/ieugwasr")
-```
-

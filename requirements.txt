@@ -1,0 +1,4 @@
+numpy==1.21.1
+pandas==2.0.3
+rdpower==1.0.1
+rdrobust==1.1.1
