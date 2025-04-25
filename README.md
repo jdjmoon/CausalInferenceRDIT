@@ -29,3 +29,14 @@ The repository is organized into the following directories:
 - [data](data): toy dataset created to run the models
 
 - [result](result): Folder to save result from 1run_models
+
+## Enviornment
+- Python version: 3.8.8
+- R version: 4.3.3
+
+conda env create -f environment.yml
+conda activate rdit_env
+install.packages("remotes")  # If not already installed
+remotes::install_github("MRCIEU/TwoSampleMR")
+remotes::install_github("MRCIEU/ieugwasr")
+

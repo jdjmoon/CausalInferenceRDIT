@@ -1,4 +1,3 @@
-library(PMR)
 library(data.table)
 library(TwoSampleMR) 
 library(ggplot2)

@@ -1,0 +1,22 @@
+name: rdit_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Python setup
+  - python=3.8.8
+  - numpy=1.21.1
+  - pandas=2.0.3
+  - pip
+  - pip:
+      - rdpower==1.0.1
+      - rdrobust==1.1.1
+
+  # R setup
+  - r-base=4.3.3
+  - r-tidyverse
+  - r-data.table
+
+  # For installing R packages from GitHub
+  - r-devtools
+  - r-remotes
