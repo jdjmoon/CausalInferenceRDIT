@@ -35,12 +35,20 @@ The repository is organized into the following directories:
 - R version: 4.3.3
 
 ### Install environment
-- conda env create -f environment.yml
+```
+conda env create -f environment.yml
+```
 
 ### Set up environment
-- conda activate rdit_env
-- R
-  - install.packages("remotes")  # If not already installed
-  - remotes::install_github("MRCIEU/TwoSampleMR")
-  - remotes::install_github("MRCIEU/ieugwasr")
+```
+conda activate rdit_env
+R
+```
+
+After opening R
+'''
+library(remotes)
+remotes::install_github("MRCIEU/TwoSampleMR")
+remotes::install_github("MRCIEU/ieugwasr")
+'''
 
