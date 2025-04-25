@@ -7,17 +7,9 @@ library(data.table)
 cov <- fread('../data/processed_data/processed_covariates_blood_chem_la.csv')
 protein <- fread('../data/processed_data/processed_blood_chem_la.csv')
 
-drug_list <- paste(c('A10BA', 'C03AA', 'A02BC', 'B01AA', 'C09AA', 'B01AC', 
-                     'H03AA', 'C10AA', 'C07AB', 'C08CA', 'N02BE', 'C09CA', 
-                     'J01CA', 'M01AE', 'J01CF', 'M01AB', 'J01FA', 'N02AA', 
-                     'R01AD', 'J01AA', 'M02AA', 'N06AA', 'H02AB', 'R03AC'), "_bf", sep = "")
-drug_list2 <- paste(c('A10BA', 'C03AA', 'A02BC', 'B01AA', 'C09AA', 'B01AC', 
-                      'H03AA', 'C10AA', 'C07AB', 'C08CA', 'N02BE', 'C09CA', 
-                      'J01CA', 'M01AE', 'J01CF', 'M01AB', 'J01FA', 'N02AA', 
-                      'R01AD', 'J01AA', 'M02AA', 'N06AA', 'H02AB', 'R03AC'), "_af", sep = "")
-drug_list3 <- c('A10BA', 'C03AA', 'A02BC', 'B01AA', 'C09AA', 'B01AC', 'H03AA', 'C10AA', 'C07AB', 
-                'C08CA', 'N02BE', 'C09CA', 'J01CA', 'M01AE', 'J01CF', 'M01AB', 'J01FA', 'N02AA', 
-                'R01AD', 'J01AA', 'M02AA', 'N06AA', 'H02AB', 'R03AC')
+drug_list <- paste(c('A10BA', 'A02BC', 'C10AA'), "_bf", sep = "")
+drug_list2 <- paste(c('A10BA', 'A02BC', 'C10AA'), "_af", sep = "")
+drug_list3 <- c('A10BA', 'A02BC', 'C10AA')
 
 columns <- c("index", "Estimate", "Std..Error", 't-value', 'Pr...t..', 'nrow', 'omics', 'drugs')
 results1 <- data.frame(matrix(nrow = 0, ncol = length(columns))) 
