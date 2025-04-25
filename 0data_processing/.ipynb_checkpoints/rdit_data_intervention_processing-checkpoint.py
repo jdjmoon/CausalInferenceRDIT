@@ -19,7 +19,7 @@ pres = pd.read_csv('../data/drug_data/ATC4_prescription/complete_gp_prescription
 pres['event_dt'] = pd.to_datetime(pres['event_dt']).dt.date
 
 # Add blood date to covariate file
-blood_date = pd.read_csv('../data/covariate_related_data/blood_date.csv')
+blood_date = pd.read_csv('../data/covariate_related_data/blood_date.csvv')
 blood_date = blood_date[['eid', 'f.3166.0']].dropna().reset_index(drop = True)
 blood_date.columns = ['eid', 'blood_date']
 blood_date['blood_date'] = pd.to_datetime(blood_date['blood_date']).dt.date

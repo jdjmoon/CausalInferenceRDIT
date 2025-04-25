@@ -12,7 +12,10 @@ colnames(omics) <- gsub("-", "_", colnames(omics))
 colnames(omics)[1] = 'f.eid'
 
 # Get list of selected drugs one is Interested in doing analysis
-drugs <- c('A10BA', 'A02BC', 'C10AA')
+drugs <- c('A10BA', 'C03AA', 'A02BC', 'B01AA', 'C09AA', 'B01AC', 
+           'H03AA', 'C10AA', 'C07AB', 'C08CA', 'N02BE', 'C09CA', 
+           'J01CA', 'M01AE', 'J01CF', 'M01AB', 'J01FA', 'N02AA',
+           'R01AD', 'J01AA', 'M02AA', 'N06AA', 'H02AB', 'R03AC')
 
 
 cov <- fread('../data/covariate_related_data/covariates.csv')

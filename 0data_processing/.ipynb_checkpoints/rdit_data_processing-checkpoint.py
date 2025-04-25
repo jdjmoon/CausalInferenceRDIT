@@ -19,7 +19,7 @@ pres = pd.read_csv('../data/drug_data/ATC4_prescription/complete_gp_prescription
 pres['event_dt'] = pd.to_datetime(pres['event_dt']).dt.date
 
 # Add blood date to covariate file
-blood_date = pd.read_csv('../data/covariate_related_data/blood_date.csv')
+blood_date = pd.read_csv('../data/covariate_related_data/blood_date.csvv')
 blood_date = blood_date[['eid', 'f.3166.0']].dropna().reset_index(drop = True)
 blood_date.columns = ['eid', 'blood_date']
 blood_date['blood_date'] = pd.to_datetime(blood_date['blood_date']).dt.date
@@ -35,7 +35,7 @@ blood_date2 = blood_date.copy()
 # Olink Proteins = omics_data/ukbnmr_processed_metabolite_firstvisit.csv
 
 nmr = pd.read_csv('../data/omics_data/bloodchem_firstvisit.csv')
-nmr = nmr.rename(columns = {'f.eid':'eid'})
+nmr = nmr.rename(columns = {'eid':'eid'})
 
 pres = pres2.copy()
 cov = cov2.copy()
@@ -78,7 +78,8 @@ for year in years:
     duration=365*year + 1
     duration_y = '_' + str(year) + 'y'
     pres=pres_org
-    pres1 = pres[pres['tte'] > 0].reset_index(drop = True)
+    pres1 = pres[pres['tte'] < duration]
+    pres1 = pres1[pres1['tte'] > -duration].reset_index(drop = True)
     pres = pres1
     
     add = pres[pres['ATC4']=='A10BA'].reset_index(drop = True)
@@ -103,7 +104,10 @@ for year in years:
         dt = pres[pres['ATC4']==drugs[i]].reset_index(drop = True)
         name = drugs[i] + duration_y
         dt2 = pd.merge(nmr, dt, on = 'eid')
+        
+        # Check if it is okay 
         if len(dt2) > 1:
+            # Outlier handling
             for j in range(1, len(nmr.columns)):
                 cutoff = 6
                 data = dt2[nmr.columns[j]]
@@ -115,10 +119,14 @@ for year in years:
                 dt2[nmr.columns[j]].where(dt2[nmr.columns[j]] <= upper, upper, inplace = True)
                 dt2[nmr.columns[j]].where(dt2[nmr.columns[j]] >= lower, lower, inplace = True)
                 dt2.loc[bools, nmr.columns[j]] = np.nan
+            
+            # Check if treated or untreated
             dt2[name] = np.where(dt2['tte'] < 0, 1, 0)
+            # Make it in terms of prescription instead of blood date
             dt2['tmp_tte'] = - dt2['tte']
             dt2 = dt2.dropna(subset = ['age', 'gender', 'center', 'PC1', 'PC2', 'bmi',"edu_yrs", "tdi", "waist_hip_ratio", "current_smk", "log_alcohol_weekly_g", 'A10BA', 'C10AA', 'A02BC']).reset_index(drop = True)
-            dt2.to_csv('../data/processed_data/DATA_B/new_' + drugs[i] +duration_y+'.csv')
+            # Modify to DATA_M, DATA_P for NMR metabolite and Olink protein
+            dt2.to_csv('../data/processed_data/DATA_B/' + drugs[i] +duration_y+'.csv')
             #table_list.append(dt2)
         else:
             print(name)

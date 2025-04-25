@@ -9,10 +9,8 @@ library(data.table)
 ## Example using the bloodchemistry
 omics1 <- fread('../data/omics_data/bloodchem_firstvisit.csv') 
 omics1 <- omics1[rowSums(!is.na(omics1)) != 1, ] # Filter rows with only one non-NA value
-colnames(omics1)[1] = 'f.eid'
-omics2 <- fread('../data/omics_data/bloodchem_secondvisit.csv') 
+omics2 <- fread('../data/omics_data/bloodchem_firstvisit.csv') 
 omics2 <- omics2[rowSums(!is.na(omics2)) != 1, ]
-colnames(omics2)[1] = 'f.eid'
 
 # Match by 'f.eid' across both datasets to get common columns
 omics1 <-  omics1[omics1$"f.eid" %in%  omics2$"f.eid",]
@@ -52,7 +50,10 @@ omics <- omics1 %>% select(colnames(omics2))
 colnames(omics)[1] = 'f.eid'
 
 # Get list of selected drugs one is Interested in doing analysis
-drugs <- c('A10BA', 'A02BC', 'C10AA')
+drugs <- c('A10BA', 'C03AA', 'A02BC', 'B01AA', 'C09AA', 'B01AC', 
+           'H03AA', 'C10AA', 'C07AB', 'C08CA', 'N02BE', 'C09CA', 
+           'J01CA', 'M01AE', 'J01CF', 'M01AB', 'J01FA', 'N02AA',
+           'R01AD', 'J01AA', 'M02AA', 'N06AA', 'H02AB', 'R03AC')
 
 cov <- fread('../data/covariate_related_data/covariates.csv')
 
