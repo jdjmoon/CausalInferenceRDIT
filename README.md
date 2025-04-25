@@ -13,7 +13,7 @@ The repository is organized into the following directories:
   - [prepare_dataset_liver_muscle_damage](0data_processing/5repare_dataset_liver_muscle_damage.ipynb): Prepares dataset for associations of statin-influenced proteins with liver and muscle damage.
 
 
-- ([1run_models](1run_models)): Scripts to reproduce the analyses and evaluate the causal associations between the ATC Level 4 Prescription and each omics biomarker.
+- [1run_models](1run_models): Scripts to reproduce the analyses and evaluate the causal associations between the ATC Level 4 Prescription and each omics biomarker.
   - [rdit_analysis](1run_models/1rdit_analysis.py): Executes RDiT analysis.
   - [cross_sectional_association_analysis](1run_models/2cross_sectional_association_analysis.R): Executes cross-sectional association analysis.
   - [longitudinal_association_analysis](1run_models/3longitudinal_association_analysis.R): Runs longitudinal association analysis.
@@ -26,4 +26,6 @@ The repository is organized into the following directories:
   - The power analysis for the RDiT model utilizes [rdpower packge](https://rdpackages.github.io/rdpower/).
   - The Mendelian Randomization model uses [TwoSampleMR](https://mrcieu.github.io/TwoSampleMR/).
   
-- ([data](data)): toy dataset created to run the models
+- [data](data): toy dataset created to run the models
+
+- [result](result): Folder to save result from 1run_models
