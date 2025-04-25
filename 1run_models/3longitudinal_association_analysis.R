@@ -52,8 +52,15 @@ for (k in 1:length(drug_list)) {
 
       result1 <- summary(lm(as.formula(paste(outcome, "~ status +", cov1)), data = temp1))$coefficients
       result1 <- data.frame(result1)
-      result1$nrow <- nrow(temp1)
       result1 <- result1 %>% rownames_to_column(var = "index")
+      result1 <- subset(result1, grepl("status", index))
+        
+      status_counts <- as.data.frame(table(temp1$status))
+      status_counts$index <- paste0('status',status_counts$Var1)
+      status_counts$nrow <- status_counts$Freq
+      status_counts <- select(status_counts, index, nrow)
+      result1 <- merge(result1, status_counts, by = 'index')
+      
       result1$omics <- outcome
       result1$drugs <- drug_list3[k]
       results1 <- rbind(results1, result1)
