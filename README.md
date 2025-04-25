@@ -46,9 +46,9 @@ R
 ```
 
 After opening R
-'''
+```
 library(remotes)
 remotes::install_github("MRCIEU/TwoSampleMR")
 remotes::install_github("MRCIEU/ieugwasr")
-'''
+```
 
