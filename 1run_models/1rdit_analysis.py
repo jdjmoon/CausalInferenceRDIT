@@ -37,15 +37,17 @@ def rd(drugs):
                 dt2_original = dt2_original.drop(['Unnamed: 0'], axis = 1)
 
             drug = drug + duration_y
-            dt2_original['tmp_tte2'] = dt2_original['tmp_tte']
 
             df = pd.DataFrame(columns=['Coeff', 'Std. Err.', 't-stat.', 'P>|t|', 'CI Lower', 'CI Upper',
             'kernel', 'Omics', 'types','covariates','n','n1','n2', 'bandwidth'])
+            
+            cols = dt2_original.columns.tolist()
+            bioms = cols[1:cols.index('event_dt')]
 
-            for j in dt2_original.columns[1:-68]:
+            for j in bioms:
                 dt2_original2 = dt2_original.copy()
                 y = dt2_original2[j]
-                x = dt2_original2.tmp_tte2
+                x = dt2_original2.tmp_tte
             
                 covs = dt2_original2[covariates]
                 for k in range(len(bw)):
@@ -91,5 +93,6 @@ def rd(drugs):
     print(not_working)
 
 if __name__ == "__main__":
-    drugs = sys.argv[1:]
+    #drugs = sys.argv[1:]
+    drugs = ['A10BA', 'A02BC', 'C10AA']
     rd(drugs)

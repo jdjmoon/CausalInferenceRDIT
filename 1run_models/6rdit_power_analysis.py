@@ -43,13 +43,15 @@ def rdpow(drugs):
                 dt2_original = dt2_original.drop(['Unnamed: 0'], axis = 1)
 
             drug = drug + duration_y
-            dt2_original['tmp_tte2'] = dt2_original['tmp_tte']
 
             df = pd.DataFrame(columns=['power_rbc', 'se_rbc', 'sampsi_r', 'sampsi_l', 'samph_r', 'samph_l', 'N_r', 'N_l', 'Nh_l', 'Nh_r', 'tau', 'bias_r', 'bias_l', 'Vr_rb', 'Vl_rb', 'alpha', 'Omics', 'drug'])
+            
+            cols = dt2_original.columns.tolist()
+            bioms = cols[1:cols.index('event_dt')]
 
-            for j in dt2_original.columns[1:-68]:
+            for j in bioms:
                 dt2_original2 = dt2_original.copy()
-                Z = dt2_original2[[j, 'tmp_tte2']]
+                Z = dt2_original2[[j, 'tmp_tte']]
             
                 covs = dt2_original2[covariates]
                 for k in range(len(bw)):
@@ -90,5 +92,6 @@ def rdpow(drugs):
     print(not_working)
 
 if __name__ == "__main__":
-    drugs = sys.argv[1:]
+    #drugs = sys.argv[1:]
+    drugs = ['A10BA', 'A02BC', 'C10AA']
     rdpow(drugs)

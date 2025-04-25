@@ -26,7 +26,8 @@ year = 3
 # Change Csv file, drug, and omics id based on your need
 csv_file = '../data/processed_data/DATA_B/new_A10BA_3y.csv' 
 drug = 'A10BA'
-omics = 'f.30750.0.0'
+#omics = 'f.30750.0.0'
+omics = 'biom1.0.0'
 
 dt2_original = pd.read_csv(csv_file)
 if 'Unnamed: 0' in dt2_original.columns:
@@ -43,10 +44,14 @@ x = dt2_original2.tmp_tte2
 
 np.random.seed(42)
 
-combined_range = np.arange(x.min(), -365*3-1-1)
-np.random.shuffle(combined_range)
-#randomc = np.random.choice(combined_range)
+## Toy dataset only is in the range within 3 year duration so in the example code it will be in overlapping range so one needs to change comment/uncomment when running the code
+# When testing the code in the actual run uncomment this  
+#combined_range = np.arange(x.min(), -365*3-1-1)
+# When testing the code in the actual run comment this
+combined_range = np.arange(x.min(), 0)
 
+
+np.random.shuffle(combined_range)
 used_c = set()
 successful_runs = 0
 
@@ -57,9 +62,15 @@ while successful_runs < 10 or len(used_c) < len(combined_range):
         continue
 
     try:
-        #est1 = rdrobust(y=y, x=x, covs=covs, bwselect=bw[0], kernel=ker[0], c=randomc)
-        dt2_original21 = dt2_original2[dt2_original2['tmp_tte'] < randomc + 365*3+1]
-        dt2_original21 = dt2_original21[dt2_original21['tmp_tte'] > randomc - 365*3-1].reset_index(drop = True)
+        ## Toy dataset only is in the range within 3 year duration  so in the example code it will be in overlapping range so one needs to change comment/uncomment when running the code
+        # When testing the code in the actual run uncomment this two 
+        #dt2_original21 = dt2_original2[dt2_original2['tmp_tte'] < randomc + 365*3+1]
+        #dt2_original21 = dt2_original21[dt2_original21['tmp_tte'] > randomc - 365*3-1].reset_index(drop = True)
+        
+        # When testing the code in the actual run comment this two
+        dt2_original21 = dt2_original2[dt2_original2['tmp_tte'] < randomc + 365*1+1]
+        dt2_original21 = dt2_original21[dt2_original21['tmp_tte'] > randomc - 365*1-1].reset_index(drop = True)
+        
         y = dt2_original21[omics]
         x = dt2_original21.tmp_tte2
         covs = dt2_original21[covariates]
