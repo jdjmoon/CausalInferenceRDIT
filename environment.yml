@@ -14,9 +14,6 @@ dependencies:
 
   # R setup
   - r-base=4.3.3
-  - r-tidyverse
-  - r-data.table
-
-  # For installing R packages from GitHub
-  - r-devtools
-  - r-remotes
+  - r-tidyverse=2.0.0
+  - r-data.table=1.16.4
+  - r-remotes=2.4.2.1
